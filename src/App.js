@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  Navigate
+} from "react-router-dom";
 
+import './App.css';
+import AdminAuthLayout from './layouts/admin-auth';
+import UserAuthLayout from './layouts/user-auth';
+
+// this is where you put routing to views
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="admin/*" element={<AdminAuthLayout />} />
+          <Route path="user/*" element={<UserAuthLayout />} />
+          <Route path="*" element={<Navigate to="user/sign-in" />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
